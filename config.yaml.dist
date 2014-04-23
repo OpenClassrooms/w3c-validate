@@ -1,0 +1,26 @@
+baseUrl: ## URL ##
+
+#login:
+#    uri: /login_check
+#    users:
+#        premium:
+#            _username: XXXX
+#            _password: XXXX
+#        member:
+#            _username: XXXX
+#            _password: XXXX
+
+icons:
+    visitor: globe
+#    premium: star
+#    member: user
+
+
+concurrentRequests: 4
+
+export: ./public/index.html
+
+template: basic
+
+url:
+    - /

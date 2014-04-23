@@ -1,0 +1,22 @@
+{
+  "name": "validator",
+  "version": "0.1.0",
+  "description": "",
+  "main": "validate.js",
+  "dependencies": {
+    "async": "~0.7.0",
+    "js-yaml": "~3.0.2",
+    "w3cjs": "~0.1.25"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.4",
+    "grunt-contrib-connect": "~0.7.1",
+    "load-grunt-tasks": "~0.4.0",
+    "load-grunt-config": "~0.8.0",
+    "handlebars": "~2.0.x",
+    "lodash": "~2.4.1",
+    "request": "~2.34.0",
+    "moment": "~2.6.0"
+  },
+  "author": "nicolas.challeil@openclassrooms.com"
+}

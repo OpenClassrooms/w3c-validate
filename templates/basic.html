@@ -1,0 +1,148 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>W3C</title>
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+        <script src="//code.jquery.com/jquery-2.1.0.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+
+        <style media="screen" type="text/css">
+            .list-group-item {
+                cursor: pointer;
+            }
+            .list-group--error li.selected {
+                background-color: #eee;
+            }
+
+            .panel-explanation {
+                width: 277px;
+                display: none;
+            }
+
+            .panel-title span.label {
+                display: inline-block;
+                width: 30px;
+                padding: 5px 0;
+                font-size: 9px;
+            }
+
+            .nav.nav-pills {
+                margin-bottom: 8px;
+            }
+        </style>
+
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-12" >
+                    <div class="page-header">
+                        <h1>{{ baseUrl }} <small>{{ date }}</small></h1>
+                    </div>
+                </div>
+
+                <div class="col-md-3" >
+
+                    <div data-spy="affix" class="panel panel-default panel-explanation js-panel-explanation">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Explanation</h3>
+                        </div>
+                        <div class="panel-body" id="explanation-container"></div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-9">
+                    <div class="panel-group" id="accordion">
+                        {{#each results}}
+                            <div class="panel panel-default">
+
+
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        {{#each validate}}
+                                            <span class="label label-{{ color }}">
+                                                <i class="icon icon-{{ icon }}"></i>
+                                                {{ messagesAmount }}
+                                            </span>
+                                        {{/each}}
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#_{{ @index }}">
+                                            {{ @key }}
+                                        </a>
+                                        <small><a target="_blank" href="{{ linkTo }}"><i class="icon icon-external-link"></i> link</a></small>
+                                    </h4>
+                                </div>
+                                
+
+                                {{#if hasError }}
+                                    <div id="_{{ @index }}" class="panel-collapse collapse">
+                                        <div class="panel-body">
+
+
+                                            <ul class="nav nav-pills">
+                                                {{#each validate}}
+                                                    <li {{#if @first }} class="active" {{/if}}>
+                                                        <a href="#{{ membershipType }}{{ @index }}" data-toggle="tab">
+                                                            <i class="icon icon-{{ icon }}"></i> {{ membershipType }}
+                                                            <span class="badge">{{ messagesAmount }} </span>
+                                                        </a>
+                                                    </li>
+                                                {{/each}}
+                                            </ul>
+
+                                            <div class="tab-content">
+                                                {{#each validate}}
+                                                    <div class="tab-pane {{#if @first }} active {{/if}}" id="{{ membershipType }}{{ @index }}">
+
+                                                        <div class="list-group list-group--error">
+                                                            {{#each messages}}
+                                                                <a class="list-group-item js-explanation" data-content="{{ explanation }}">
+                                                                    <strong>l. {{ lastLine }}</strong> {{ message }}
+                                                                </a>
+                                                            {{/each}}
+                                                        </div> 
+
+                                                    </div>
+                                                {{/each}}
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                {{/if}}
+
+
+                            </div>
+                        {{/each}}
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    <script>
+        var $panel = $('.js-panel-explanation');
+
+        $(document).on('click', '.js-explanation', function (event) {
+            
+            $('.list-group-item').removeClass('active');
+            $(this).addClass('active');
+
+            var html = $(this).data('content');
+            
+            if (!html.match('helpwanted')) {
+                $('#explanation-container').html(html);
+                $panel.show();
+            } else {
+                $panel.hide();
+            }
+        });
+    </script>
+    </body>
+</html>
